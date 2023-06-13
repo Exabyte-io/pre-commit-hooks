@@ -1,0 +1,26 @@
+---
+# pre-commit hook configs
+
+- id: black
+  name: black
+  description: Black formatter
+  entry: black
+  args: [
+    --target-version=py38,
+    --line-length=120
+  ]
+  language: python
+  types: [python]
+  additional_dependencies: [black==23.3.0]
+
+- id: ruff
+  name: ruff
+  description: Ruff linter
+  entry: ruff
+  args: [
+    --target-version=py38,
+    --line-length=120,
+  ]
+  language: python
+  types: [python]
+  additional_dependencies: [ruff==v0.0.272]
