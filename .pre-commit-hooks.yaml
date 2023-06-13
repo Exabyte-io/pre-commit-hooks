@@ -5,11 +5,9 @@
   name: black
   description: Black formatter
   entry: black
-  args: [
-    --target-version=py38,
-    --line-length=120
-  ]
+  args: [ --target-version=py38, --line-length=120 ]
   language: python
+  require_serial: true
   types: [python]
   additional_dependencies: [black==23.3.0]
 
@@ -17,10 +15,18 @@
   name: ruff
   description: Ruff linter
   entry: ruff
-  args: [
-    --target-version=py38,
-    --line-length=120,
-  ]
+  args: [ --target-version=py38, --line-length=120 ]
   language: python
+  require_serial: true
   types: [python]
   additional_dependencies: [ruff==v0.0.272]
+
+- id: pydocstyle
+  name: pydocstyle
+  description: Docstring checker
+  entry: pydocstyle
+  args: [ --convention=google, --add-ignore=D401,D104]
+  language: python
+  require_serial: true
+  types: [python]
+  additional_dependencies: [pydocstyle==6.3.0]
