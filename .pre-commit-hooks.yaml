@@ -30,3 +30,23 @@
   require_serial: true
   types: [python]
   additional_dependencies: [pydocstyle==6.3.0]
+
+- id: isort
+  name: isort
+  entry: isort
+  require_serial: true
+  language: python
+  types_or: [cython, pyi, python]
+  args: [--filter-files, --profile=black, --line-length=120, --trailing-comma, --multi-line=3, --python-version=38]
+  additional_dependencies: [isort==5.8.0]
+  minimum_pre_commit_version: '2.9.2'
+
+- id: mypy
+  name: mypy
+  entry: mypy
+  language: python
+  types_or: [python, pyi]
+  args: [--ignore-missing-imports, --scripts-are-modules, --python-version=3.8]
+  require_serial: true
+  additional_dependencies: [mypy==1.4.1, types-requests, types-tabulate]
+  minimum_pre_commit_version: '2.9.2'
