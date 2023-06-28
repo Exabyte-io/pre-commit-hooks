@@ -5,18 +5,29 @@
   name: black
   description: Black formatter
   entry: black
-  args: [ --target-version=py38, --line-length=120 ]
+  args: [--target-version=py38, --line-length=120]
   language: python
   require_serial: true
-  types: [python]
+  types_or: [python, pyi]
   additional_dependencies: [black==23.3.0]
+
+- id: black-jupyter
+  name: black-jupyter
+  description: Black formatter with Jupyter Notebook support
+  entry: black
+  args: [--target-version=py38, --line-length=120]
+  language: python
+  require_serial: true
+  types_or: [python, pyi, jupyter]
+  additional_dependencies: ["black[jupyter]==23.3.0"]
 
 - id: ruff
   name: ruff
   description: Ruff linter
   entry: ruff
-  args: [ --target-version=py38, --line-length=120 ]
+  args: [--target-version=py38, --line-length=120]
   language: python
+  minimum_pre_commit_version: 2.9.2
   require_serial: true
   types: [python]
   additional_dependencies: [ruff==v0.0.272]
@@ -25,8 +36,9 @@
   name: pydocstyle
   description: Docstring checker
   entry: pydocstyle
-  args: [ --convention=google, --add-ignore=D401,D104]
+  args: [--convention=google, --add-ignore=D401,D104]
   language: python
+  minimum_pre_commit_version: 2.9.2
   require_serial: true
   types: [python]
   additional_dependencies: [pydocstyle==6.3.0]
@@ -36,17 +48,43 @@
   entry: isort
   require_serial: true
   language: python
+  minimum_pre_commit_version: 2.9.2
   types_or: [cython, pyi, python]
   args: [--filter-files, --profile=black, --line-length=120, --trailing-comma, --multi-line=3, --python-version=38]
   additional_dependencies: [isort==5.8.0]
-  minimum_pre_commit_version: '2.9.2'
 
 - id: mypy
   name: mypy
   entry: mypy
   language: python
+  minimum_pre_commit_version: 2.9.2
   types_or: [python, pyi]
   args: [--ignore-missing-imports, --scripts-are-modules, --python-version=3.8]
   require_serial: true
   additional_dependencies: [mypy==1.4.1, types-requests, types-tabulate]
-  minimum_pre_commit_version: '2.9.2'
+
+- id: check-yaml
+  name: check yaml
+  description: checks yaml files for parseable syntax.
+  entry: check-yaml
+  language: python
+  types: [yaml]
+  additional_dependencies: [pre-commit-hooks==4.4.0]
+
+- id: end-of-file-fixer
+  name: fix end of files
+  description: ensures that a file is either empty, or ends with one newline.
+  entry: end-of-file-fixer
+  language: python
+  types: [text]
+  stages: [commit, push, manual]
+  additional_dependencies: [pre-commit-hooks==4.4.0]
+
+- id: trailing-whitespace
+  name: trim trailing whitespace
+  description: trims trailing whitespace.
+  entry: trailing-whitespace-fixer
+  language: python
+  types: [text]
+  stages: [commit, push, manual]
+  additional_dependencies: [pre-commit-hooks==4.4.0]
