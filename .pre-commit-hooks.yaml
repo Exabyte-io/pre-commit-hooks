@@ -63,6 +63,15 @@
   require_serial: true
   additional_dependencies: [mypy==1.4.1, types-requests, types-tabulate, types-pyyaml]
 
+- id: yamllint
+  name: yamllint
+  description: apply yamllint formatting rules to yaml files
+  types: [yaml]
+  entry: yamllint
+  language: python
+  require_serial: true
+  additional_dependencies: [yamllint==1.32.0]
+
 - id: check-yaml
   name: check yaml
   description: checks yaml files for parseable syntax.
